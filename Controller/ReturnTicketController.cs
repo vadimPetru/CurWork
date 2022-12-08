@@ -1,23 +1,50 @@
 ﻿using CurWork.DAL.Context;
 using CurWork.DAL.Entities;
 using CurWork.Helpers;
-using System.Collections.Generic;
+using CurWork.TypeOFValidations;
+
 
 namespace CurWork.Controller
 {
+    public delegate void ReturnHendler(Customer currentCustomer);
     public  class ReturnTicketController : ITicket
     {
-        GetHelpers get = new GetHelpers();
-        MoviesList list = new();
+        public event ReturnHendler returning;
+        public BuyHendler buying;
+        private GetHelpers _get;
+        private MoviesList _list;
+        public ReturnTicketController(ValidationString validation)
+        {
+            
+            _get = new GetHelpers(validation);
+            _list = new();
+        }
+       
+        public void OnRegistration(Customer currentCustomer)
+        {
+            returning += Ticket;
+            returning?.Invoke(currentCustomer);
+        }
+
+        public void UnRegistration()
+        {
+            returning -= Ticket;
+        }
         public void Ticket(Customer currentCustomer)
         {
-            list.GetRecords();
-            var selectedMovie = get.Get(Console.ReadLine(), new Movie());
+            _list.GetRecords();
+            var selectedMovie = _get.Get(new Movie());
+            var selectedCustomer = _get.Get(currentCustomer);
+            
             using (TicketsalesmanagerContext context = new())
             {
-                context.Charterclients.Remove(new Charterclient() { Customerid = currentCustomer.Id, Movieid = selectedMovie.Id });
+                var selectedRecord = context.Charterclients.Where(t => t.Customerid == selectedCustomer.Id & t.Movieid == selectedMovie.Id).FirstOrDefault();
+
+                context.Charterclients.Remove(selectedRecord);
                 context.SaveChanges();
             }
         }
+
+        
     } 
 }

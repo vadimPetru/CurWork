@@ -1,25 +1,35 @@
-﻿using CurWork.AbstractClasses;
+﻿
 using CurWork.DAL.Entities;
 using CurWork.Properties;
-
+using CurWork.TypeOFValidations;
 
 namespace CurWork.TypeForm
 {
-    public abstract class Forms : ValidationHelper , IUserInput
+    public abstract class Forms : Validation
     {
+        private readonly ValidationString _validation;
+
+        protected Forms(ValidationString validation) 
+        {
+            _validation = validation;
+        }
+
         public virtual Customer InputDate(Customer customer)
         {
-            Initialize(customer.Name, Resources.InputName);
-            Initialize(customer.Surname, Resources.InputSurname);
-            Initialize(customer.Age, Resources.InputSurname);
+            customer.Name = Initialize(customer.Name, Resources.InputName) ;
+            customer.Surname = Initialize(customer.Surname, Resources.InputSurname);
+            customer.Age= int.Parse(Initialize(customer.Age.ToString(), Resources.InputAge));
+           
             return customer;
             
         }
 
-        public  void Initialize( object Value,string Request)
+        private string Initialize(string Value , string Request)
         {
             Console.WriteLine(Request);
-            Value = isValid();
+            return Value = _validation.IsValid("UnValidRecord");
         }
+
+        
     }
 }

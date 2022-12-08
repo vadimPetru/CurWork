@@ -12,7 +12,7 @@ namespace CurWork.Helpers
 
                 foreach (var item in list)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(item.Moviename);
                 }
             }
 

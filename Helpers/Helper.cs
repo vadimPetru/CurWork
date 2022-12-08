@@ -1,12 +1,18 @@
 ﻿using CurWork.DAL.Context;
 using CurWork.DAL.Entities;
+using CurWork.Properties;
 using CurWork.TypeForm;
-using System.Runtime.CompilerServices;
+using CurWork.TypeOFValidations;
 
 namespace CurWork.Helpers
 {
     public class Helper : Forms, IVerification
     {
+        public Helper(ValidationString validation) : base(validation)
+        {
+
+        }
+
         public Customer CheackUser(Customer customer) // Проверка есть ли такой пользователь в базе
         {
             using (TicketsalesmanagerContext context = new())
@@ -16,7 +22,7 @@ namespace CurWork.Helpers
                                                     & item.Age == customer.Age).FirstOrDefault();
                 if(User == null)
                 {
-                    throw new Exception("Простите пользоватея нет");
+                    throw new Exception(Resources.ExceptionUserNotDatabase);
                 }
                 return User;
                    

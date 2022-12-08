@@ -1,35 +1,44 @@
-﻿using CurWork.Items;
-using CurWork.Properties;
+﻿using CurWork.Properties;
 using CurWork.Menu;
-using Microsoft.Identity.Client;
 using CurWork.DAL.Entities;
+using CurWork.TypeOFValidations;
 
 namespace CurWork.Controller
 {
-    public class MenuController 
+    public class MenuController  
     {
-        MenuObject _menu;
-        static List<ITicket> _items = new List<ITicket>
-        {
-            new BuyTicketController(), // Покупка билетов
-            new ReturnTicketController(),
-            
-        };
+        private readonly BuyTicketController buying;
+        private readonly ReturnTicketController returning;
+        private readonly MenuObject _menu;
        
-        public MenuController()
+        public MenuController(ValidationString validation) 
         {
-            _menu = new(Resources.buyTicket, Resources.returnTicket, Resources.Exit);
+            _menu = new(Resources.buyTicket, Resources.returnTicket);
+            buying = new BuyTicketController(validation);
+            returning = new(validation);
         }
-       
-        public void LogicsMenu()
+
+        public void LogicsMenu(Customer currentCustomer)
         {
 
             Console.WriteLine(_menu);
             int input = int.Parse(Console.ReadLine());
-            var result = Logics(input);
+            if(input == 1)
+            {
+                buying.OnRegistration(currentCustomer);
+                
+                buying.UnRegistration();
+            }
+            if(input == 2)
+            {
+                returning.OnRegistration(currentCustomer);
+
+                returning.UnRegistration();
+            }
             
+           
         }
 
-        private static ITicket Logics(int item) =>_items[item - 1].Ticket();
+        
     }
 }

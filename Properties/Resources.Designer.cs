@@ -70,11 +70,38 @@ namespace CurWork.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выйти из программы..
+        ///   Ищет локализованную строку, похожую на Unvalid Age.
         /// </summary>
-        internal static string Exit {
+        internal static string ExceptionAgeConstraint {
             get {
-                return ResourceManager.GetString("Exit", resourceCulture);
+                return ResourceManager.GetString("ExceptionAgeConstraint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на This user is in the database.
+        /// </summary>
+        internal static string ExceptionUserDatabase {
+            get {
+                return ResourceManager.GetString("ExceptionUserDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на This user is&apos;nt in the database .
+        /// </summary>
+        internal static string ExceptionUserNotDatabase {
+            get {
+                return ResourceManager.GetString("ExceptionUserNotDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на You must enter only yes or not.
+        /// </summary>
+        internal static string ExceptionYesOrNot {
+            get {
+                return ResourceManager.GetString("ExceptionYesOrNot", resourceCulture);
             }
         }
         
@@ -106,11 +133,29 @@ namespace CurWork.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на @&quot;^[0-9]+$&quot;.
+        /// </summary>
+        internal static string NumberValid {
+            get {
+                return ResourceManager.GetString("NumberValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вернуть билет..
         /// </summary>
         internal static string returnTicket {
             get {
                 return ResourceManager.GetString("returnTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на @&quot;^[a-zA-Z]+$&quot;.
+        /// </summary>
+        internal static string StringValid {
+            get {
+                return ResourceManager.GetString("StringValid", resourceCulture);
             }
         }
     }

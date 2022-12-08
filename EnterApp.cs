@@ -1,54 +1,60 @@
 ﻿using CurWork.TypeForm;
 using CurWork.TypeForm.Form;
 using CurWork.DAL.Entities;
-using CurWork.Helpers;
-using CurWork.AbstractClasses;
+using CurWork.Properties;
+using CurWork.TypeOFValidations;
 
 namespace CurWork
 {
 
-    public class EnterApp : ValidationHelper, IHint
+    public class EnterApp : ValidationYesNo
     {
-        //delegate Action DelegateAction();
-        FormRegistration formRegistration;
-        FormAuthorization formAuthorization;
-        public string Message { get; set; }
-        public ChoisenHelper choisenHelper { get; private set; }
-        public EnterApp()
+
+        private readonly FormRegistration _formRegistration;
+        private readonly FormAuthorization _formAuthorization;
+        private ValidationYesNo _yesNo;
+        public string? Message { get; set; }
+
+        public EnterApp(ValidationString validation) : base()
         {
-            formRegistration = new();
-            formAuthorization = new();
-            Message = isValid();
+            _formRegistration = new(validation);
+            _formAuthorization = new(validation);
+            _yesNo = new();
+            Message = _yesNo.IsValid("Enter Yes or No");
+        }
+       
+
+
+
+        private Customer OnRegistration()
+        {
+            
+           return _formRegistration.AddDataBase();
         }
 
-        private void OnRegistration()
+        private Customer OnAuthorization()
         {
-            formRegistration.InputDate(new Customer());
+            return _formAuthorization.onCheak();
         }
 
-        private void OnAuthorization()
-        {
-            formAuthorization.InputDate(new Customer());
-        }
-        public void GetHint(string message)
-        {
-            Console.WriteLine(message); ;
-        }
 
-        public void MakeAChoice()
+        public Customer MakeAChoice()
         {
-            if (Message == nameof(Behaviour.Да))
+            if (Message == nameof(Behaviour.YES))
             {
-                OnAuthorization();
+                return OnAuthorization();
             }
-            else if (Message == nameof(Behaviour.Нет))
+            else if (Message == nameof(Behaviour.NO))
             {
-                OnRegistration();
+                return OnRegistration();
             }
             else
             {
-                throw new Exception("Вводим только Да или Нет");
+                throw new Exception(Resources.ExceptionYesOrNot);
             }
+            
+            
+
         }
     }
 }

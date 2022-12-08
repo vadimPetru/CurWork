@@ -1,28 +1,53 @@
 ﻿using CurWork.Helpers;
 using CurWork.DAL.Entities;
 using CurWork.DAL.Context;
-using System.Linq;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.IdentityModel.Tokens;
+using CurWork.TypeOFValidations;
 
 namespace CurWork.Controller
 {
+    public delegate void BuyHendler(Customer currentCustomer);
+    
     public class BuyTicketController  : GetHelpers , ITicket
     {
-        GetHelpers get = new();
-        MoviesList list = new();
+        
+        private event BuyHendler BuyTicket;
+        private readonly GetHelpers _get;
+        private readonly MoviesList _list;
+        
+        public BuyTicketController(ValidationString validation) : base(validation)
+        {
+           
+            _get = new GetHelpers(validation);
+            _list = new MoviesList();
+        }
+
+        public void OnRegistration(Customer currentCustomer)
+        {
+            BuyTicket += Ticket;
+            BuyTicket?.Invoke(currentCustomer);
+        }
+
+        public void UnRegistration()
+        {
+            BuyTicket -= Ticket;
+        }
+        
         public void Ticket(Customer currentCustomer)
         {
             
-            list.GetRecords();
-            var selectedMovie =  get.Get(Console.ReadLine(),new Movie());
+            _list.GetRecords();
+            var selectedMovie =  _get.Get(new Movie());
+            var selectedCustomer = _get.Get(currentCustomer);
             using(TicketsalesmanagerContext context = new())
             {
-                context.Charterclients.Add(new Charterclient() { Customerid = currentCustomer.Id, Movieid = selectedMovie.Id });
+                context.Charterclients.Add(new Charterclient() { Customerid = selectedCustomer.Id, Movieid = selectedMovie.Id });
                 context.SaveChanges();
             }
+            
         }
 
-       
+        
+
+
     }
 }

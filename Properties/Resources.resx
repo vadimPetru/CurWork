@@ -120,8 +120,17 @@
   <data name="buyTicket" xml:space="preserve">
     <value>Купить билет в кино.</value>
   </data>
-  <data name="Exit" xml:space="preserve">
-    <value>Выйти из программы.</value>
+  <data name="ExceptionAgeConstraint" xml:space="preserve">
+    <value>Unvalid Age</value>
+  </data>
+  <data name="ExceptionUserDatabase" xml:space="preserve">
+    <value>This user is in the database</value>
+  </data>
+  <data name="ExceptionUserNotDatabase" xml:space="preserve">
+    <value>This user is'nt in the database </value>
+  </data>
+  <data name="ExceptionYesOrNot" xml:space="preserve">
+    <value>You must enter only yes or not</value>
   </data>
   <data name="InputAge" xml:space="preserve">
     <value>Введите сколько вам лет?</value>
@@ -132,7 +141,13 @@
   <data name="InputSurname" xml:space="preserve">
     <value>Введите Вашу Фамилию?</value>
   </data>
+  <data name="NumberValid" xml:space="preserve">
+    <value>@"^[0-9]+$"</value>
+  </data>
   <data name="returnTicket" xml:space="preserve">
     <value>Вернуть билет.</value>
+  </data>
+  <data name="StringValid" xml:space="preserve">
+    <value>@"^[a-zA-Z]+$"</value>
   </data>
 </root>

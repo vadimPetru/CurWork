@@ -2,23 +2,34 @@
 using CurWork.DAL.Entities;
 using CurWork.TypeForm;
 using CurWork.TypeForm.Form;
+using CurWork.TypeOFValidations;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CurWork.Helpers
 {
-    public class GetHelpers : IGet<Movie> , IGet<Customer> 
+    public class GetHelpers  : IGet<Movie> , IGet<Customer> 
     {
-        FormAuthorization FormAuthorization = new();
-        FormRegistration FormRegistration = new();
-        public Movie Get(string movieName , Movie movie)
+        private readonly FormRegistration _formRegistration;
+        private readonly FormAuthorization _formAuthorization;
+        public GetHelpers(ValidationString validation) 
+        {
+            _formAuthorization = new(validation);
+            _formRegistration = new(validation);
+        }
+
+        
+        
+        public Movie Get(Movie movie)
         {
            using(TicketsalesmanagerContext context = new())
             {
-               var  movies = context.Movies.Where(t=> t.Moviename == movieName);
+                Console.WriteLine("Введите название фильма");
+                string movieName = Console.ReadLine();
+                var  movies = context.Movies.Where(t=> t.Moviename == movieName);
                 if (movies.IsNullOrEmpty())
                 {
-                    Console.WriteLine("Введите название фильма");
-                    Get(Console.ReadLine(), movie);
+                   
+                    Get(movie);
                 }
                 else
                 {
@@ -32,25 +43,17 @@ namespace CurWork.Helpers
             }
         }
 
-        public Customer Get(string customerID, Customer customer )
+        public Customer Get(Customer customer )
         {
             using (TicketsalesmanagerContext context = new())
             {
-                var customers = context.Customers.Where(t => t.Id == int.Parse(customerID));
-                if (customers.IsNullOrEmpty())
-                {
-                    FormRegistration.AddDataBase();
-                    Get(customerID, customer);
-                }
-                else
-                {
-                    foreach (var element in customers)
-                    {
-                        customer = element;
-                    }
-                    
-                }
-                return customer;
+                var selectedCustomer = context.Customers.Where(t => t.Name == customer.Name 
+                                                           & t.Surname==customer.Surname 
+                                                           & t.Age == customer.Age)
+                                                 .FirstOrDefault();
+               
+               
+                return selectedCustomer;
             }
         }
 

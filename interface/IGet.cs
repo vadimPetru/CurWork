@@ -4,7 +4,8 @@ namespace CurWork
 {
     public interface IGet<T>
     {
-        public T Get(string name ,T movie);
-        
+        public  T Get(T movie);
+
+       
     }
 }

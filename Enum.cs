@@ -2,9 +2,10 @@
 {
     public enum Behaviour 
     {
-        Да,
-        Нет
+        YES,
+        NO
     }
 
+    
     
 }
