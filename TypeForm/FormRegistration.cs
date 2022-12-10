@@ -2,27 +2,26 @@
 using CurWork.DAL.Entities;
 using CurWork.Helpers;
 using CurWork.Properties;
-using CurWork.TypeOFValidations;
 using System.Data;
 
 namespace CurWork.TypeForm
 
 {
-    public class FormRegistration : Helper
+    public class FormRegistration : Helper , IOnCheack
     {
-        static ValidationString validation = new();
-        private readonly Helper _helper = new(validation);
+        
+        private readonly Helper _helper = new();
         private  Customer _customer;
-        public FormRegistration(ValidationString validation) : base(validation)
+        public FormRegistration() 
         {
             _customer = new Customer();
         }
 
-        public Customer AddDataBase() // A user adds in the database 
+        public Customer OnCheack() // A user adds in the database 
         {
             using (TicketsalesmanagerContext context = new())
             {
-                _customer = _helper.InputDate(new Customer());
+                _customer = _helper.CreateCustomer(new Customer());
                 if (context.Customers.Where(item => item.Name == _customer.Name
                                                     & item.Surname == _customer.Surname
                                                     & item.Age == _customer.Age).FirstOrDefault() == null)

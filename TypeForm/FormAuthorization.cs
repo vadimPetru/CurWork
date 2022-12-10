@@ -6,23 +6,23 @@ using CurWork.TypeOFValidations;
 
 namespace CurWork.TypeForm.Form
 {
-    public class FormAuthorization : Forms
+    public class FormAuthorization : Forms , IOnCheack
     {
 
         private readonly Helper _helper;
         public Customer Customer { get; private set; }
-        public FormAuthorization(ValidationString validation) : base(validation)
+        public FormAuthorization() : base()
         {
-            _helper = new(validation);
+            _helper = new();
            
         }
         
-        public Customer onCheak()
+        public Customer OnCheack()
         {
             using (TicketsalesmanagerContext context = new())
             {
 
-                 Customer = _helper.CheackUser(_helper.InputDate(new Customer()));
+                 Customer = _helper.CheackUser(_helper.CreateCustomer(new Customer()));
                
                 return Customer;
             }

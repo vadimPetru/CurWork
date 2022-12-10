@@ -8,10 +8,7 @@ namespace CurWork.Helpers
 {
     public class Helper : Forms, IVerification
     {
-        public Helper(ValidationString validation) : base(validation)
-        {
-
-        }
+       
 
         public Customer CheackUser(Customer customer) // Проверка есть ли такой пользователь в базе
         {

@@ -2,58 +2,41 @@
 using CurWork.TypeForm.Form;
 using CurWork.DAL.Entities;
 using CurWork.Properties;
-using CurWork.TypeOFValidations;
+using CurWork.Menu;
 
 namespace CurWork
 {
 
-    public class EnterApp : ValidationYesNo
+    public class EnterApp 
     {
 
         private readonly FormRegistration _formRegistration;
         private readonly FormAuthorization _formAuthorization;
-        private ValidationYesNo _yesNo;
-        public string? Message { get; set; }
+        private readonly MenuObject choiceMenu;
 
-        public EnterApp(ValidationString validation) : base()
+
+        public EnterApp() 
         {
-            _formRegistration = new(validation);
-            _formAuthorization = new(validation);
-            _yesNo = new();
-            Message = _yesNo.IsValid("Enter Yes or No");
+            _formRegistration = new();
+            _formAuthorization = new();
+            choiceMenu = new(Resources.Yes,Resources.No);
         }
+
        
-
-
-
-        private Customer OnRegistration()
+        public Customer MakeAChoice() // TODO:
         {
-            
-           return _formRegistration.AddDataBase();
-        }
+            Console.WriteLine(Resources.Registraion);
+            Console.WriteLine(choiceMenu);
+            var index = int.Parse(Console.ReadLine());
 
-        private Customer OnAuthorization()
-        {
-            return _formAuthorization.onCheak();
-        }
+            List<IOnCheack> forms = new List<IOnCheack>
+            {
+                _formAuthorization,
+                _formRegistration
+                
+            };
 
-
-        public Customer MakeAChoice()
-        {
-            if (Message == nameof(Behaviour.YES))
-            {
-                return OnAuthorization();
-            }
-            else if (Message == nameof(Behaviour.NO))
-            {
-                return OnRegistration();
-            }
-            else
-            {
-                throw new Exception(Resources.ExceptionYesOrNot);
-            }
-            
-            
+            return forms[index-1].OnCheack();
 
         }
     }

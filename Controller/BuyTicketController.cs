@@ -14,10 +14,10 @@ namespace CurWork.Controller
         private readonly GetHelpers _get;
         private readonly MoviesList _list;
         
-        public BuyTicketController(ValidationString validation) : base(validation)
+        public BuyTicketController() 
         {
            
-            _get = new GetHelpers(validation);
+            _get = new GetHelpers();
             _list = new MoviesList();
         }
 
@@ -37,10 +37,9 @@ namespace CurWork.Controller
             
             _list.GetRecords();
             var selectedMovie =  _get.Get(new Movie());
-            var selectedCustomer = _get.Get(currentCustomer);
             using(TicketsalesmanagerContext context = new())
             {
-                context.Charterclients.Add(new Charterclient() { Customerid = selectedCustomer.Id, Movieid = selectedMovie.Id });
+                context.Charterclients.Add(new Charterclient() { Customerid = currentCustomer.Id, Movieid = selectedMovie.Id });
                 context.SaveChanges();
             }
             

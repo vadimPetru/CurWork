@@ -6,6 +6,5 @@ namespace CurWork
     {
         public  T Get(T movie);
 
-       
     }
 }

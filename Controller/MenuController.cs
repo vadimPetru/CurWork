@@ -7,36 +7,54 @@ namespace CurWork.Controller
 {
     public class MenuController  
     {
-        private readonly BuyTicketController buying;
-        private readonly ReturnTicketController returning;
+        private readonly BuyTicketController _buying;
+        private readonly ReturnTicketController _returning;
         private readonly MenuObject _menu;
-       
-        public MenuController(ValidationString validation) 
+        List<ITicket> tickets = new();
+        
+
+        private IEnumerable<ITicket> Add()
         {
-            _menu = new(Resources.buyTicket, Resources.returnTicket);
-            buying = new BuyTicketController(validation);
-            returning = new(validation);
+            tickets.Add(_buying);
+            tickets.Add(_returning);
+            return tickets;
         }
 
+        public MenuController() 
+        {
+            _menu = new(Resources.buyTicket, Resources.returnTicket);
+            _buying = new BuyTicketController();
+            _returning = new();
+        }
+
+
+        
         public void LogicsMenu(Customer currentCustomer)
         {
-
+           
             Console.WriteLine(_menu);
             int input = int.Parse(Console.ReadLine());
-            if(input == 1)
-            {
-                buying.OnRegistration(currentCustomer);
-                
-                buying.UnRegistration();
-            }
-            if(input == 2)
-            {
-                returning.OnRegistration(currentCustomer);
+            tickets = (List<ITicket>)Add();
+            tickets[input-1].OnRegistration(currentCustomer);
+            tickets[input-1].UnRegistration();
 
-                returning.UnRegistration();
-            }
-            
-           
+
+
+
+            //if (input == 1)
+            //{
+            //    _buying.OnRegistration(currentCustomer);
+
+            //    _buying.UnRegistration();
+            //}
+            //if (input == 2)
+            //{
+            //    _returning.OnRegistration(currentCustomer);
+
+            //    _returning.UnRegistration();
+            //}
+
+
         }
 
         

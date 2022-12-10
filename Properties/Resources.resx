@@ -123,14 +123,17 @@
   <data name="ExceptionAgeConstraint" xml:space="preserve">
     <value>Unvalid Age</value>
   </data>
+  <data name="ExceptionMovieNotDatabase" xml:space="preserve">
+    <value>This film is'nt in the database</value>
+  </data>
+  <data name="ExceptionUnvalidRecord" xml:space="preserve">
+    <value>Record is Unvalid</value>
+  </data>
   <data name="ExceptionUserDatabase" xml:space="preserve">
     <value>This user is in the database</value>
   </data>
   <data name="ExceptionUserNotDatabase" xml:space="preserve">
     <value>This user is'nt in the database </value>
-  </data>
-  <data name="ExceptionYesOrNot" xml:space="preserve">
-    <value>You must enter only yes or not</value>
   </data>
   <data name="InputAge" xml:space="preserve">
     <value>Введите сколько вам лет?</value>
@@ -141,13 +144,16 @@
   <data name="InputSurname" xml:space="preserve">
     <value>Введите Вашу Фамилию?</value>
   </data>
-  <data name="NumberValid" xml:space="preserve">
-    <value>@"^[0-9]+$"</value>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Registraion" xml:space="preserve">
+    <value>Вы зарегистрированны на сайте:</value>
   </data>
   <data name="returnTicket" xml:space="preserve">
     <value>Вернуть билет.</value>
   </data>
-  <data name="StringValid" xml:space="preserve">
-    <value>@"^[a-zA-Z]+$"</value>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

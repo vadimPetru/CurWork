@@ -16,7 +16,7 @@ namespace CurWork.Helpers
                 }
             }
 
-            Console.WriteLine("Введите название фильма:");
+            
         }
     }
 }

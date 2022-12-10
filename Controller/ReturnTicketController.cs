@@ -13,10 +13,10 @@ namespace CurWork.Controller
         public BuyHendler buying;
         private GetHelpers _get;
         private MoviesList _list;
-        public ReturnTicketController(ValidationString validation)
+        public ReturnTicketController()
         {
             
-            _get = new GetHelpers(validation);
+            _get = new GetHelpers();
             _list = new();
         }
        
@@ -34,17 +34,16 @@ namespace CurWork.Controller
         {
             _list.GetRecords();
             var selectedMovie = _get.Get(new Movie());
-            var selectedCustomer = _get.Get(currentCustomer);
             
             using (TicketsalesmanagerContext context = new())
             {
-                var selectedRecord = context.Charterclients.Where(t => t.Customerid == selectedCustomer.Id & t.Movieid == selectedMovie.Id).FirstOrDefault();
+                var selectedRecord = context.Charterclients.Where(t => t.Customerid == currentCustomer.Id & t.Movieid == selectedMovie.Id).FirstOrDefault();
 
                 context.Charterclients.Remove(selectedRecord);
                 context.SaveChanges();
             }
         }
 
-        
+       
     } 
 }

@@ -79,6 +79,24 @@ namespace CurWork.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на This film is&apos;nt in the database.
+        /// </summary>
+        internal static string ExceptionMovieNotDatabase {
+            get {
+                return ResourceManager.GetString("ExceptionMovieNotDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Record is Unvalid.
+        /// </summary>
+        internal static string ExceptionUnvalidRecord {
+            get {
+                return ResourceManager.GetString("ExceptionUnvalidRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на This user is in the database.
         /// </summary>
         internal static string ExceptionUserDatabase {
@@ -93,15 +111,6 @@ namespace CurWork.Properties {
         internal static string ExceptionUserNotDatabase {
             get {
                 return ResourceManager.GetString("ExceptionUserNotDatabase", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на You must enter only yes or not.
-        /// </summary>
-        internal static string ExceptionYesOrNot {
-            get {
-                return ResourceManager.GetString("ExceptionYesOrNot", resourceCulture);
             }
         }
         
@@ -133,11 +142,20 @@ namespace CurWork.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на @&quot;^[0-9]+$&quot;.
+        ///   Ищет локализованную строку, похожую на No.
         /// </summary>
-        internal static string NumberValid {
+        internal static string No {
             get {
-                return ResourceManager.GetString("NumberValid", resourceCulture);
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы зарегистрированны на сайте:.
+        /// </summary>
+        internal static string Registraion {
+            get {
+                return ResourceManager.GetString("Registraion", resourceCulture);
             }
         }
         
@@ -151,11 +169,11 @@ namespace CurWork.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на @&quot;^[a-zA-Z]+$&quot;.
+        ///   Ищет локализованную строку, похожую на Yes.
         /// </summary>
-        internal static string StringValid {
+        internal static string Yes {
             get {
-                return ResourceManager.GetString("StringValid", resourceCulture);
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

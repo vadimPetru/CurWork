@@ -1,24 +1,12 @@
 ﻿using CurWork.DAL.Context;
 using CurWork.DAL.Entities;
-using CurWork.TypeForm;
-using CurWork.TypeForm.Form;
-using CurWork.TypeOFValidations;
+using CurWork.Properties;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CurWork.Helpers
 {
-    public class GetHelpers  : IGet<Movie> , IGet<Customer> 
+    public class GetHelpers  : IGet<Movie> 
     {
-        private readonly FormRegistration _formRegistration;
-        private readonly FormAuthorization _formAuthorization;
-        public GetHelpers(ValidationString validation) 
-        {
-            _formAuthorization = new(validation);
-            _formRegistration = new(validation);
-        }
-
-        
-        
         public Movie Get(Movie movie)
         {
            using(TicketsalesmanagerContext context = new())
@@ -28,8 +16,7 @@ namespace CurWork.Helpers
                 var  movies = context.Movies.Where(t=> t.Moviename == movieName);
                 if (movies.IsNullOrEmpty())
                 {
-                   
-                    Get(movie);
+                    throw new Exception(Resources.ExceptionMovieNotDatabase);
                 }
                 else
                 {
@@ -43,19 +30,19 @@ namespace CurWork.Helpers
             }
         }
 
-        public Customer Get(Customer customer )
-        {
-            using (TicketsalesmanagerContext context = new())
-            {
-                var selectedCustomer = context.Customers.Where(t => t.Name == customer.Name 
-                                                           & t.Surname==customer.Surname 
-                                                           & t.Age == customer.Age)
-                                                 .FirstOrDefault();
+        //public Customer Get(Customer customer )
+        //{
+        //    using (TicketsalesmanagerContext context = new())
+        //    {
+        //        var selectedCustomer = context.Customers.Where(t => t.Name == customer.Name 
+        //                                                   & t.Surname==customer.Surname 
+        //                                                   & t.Age == customer.Age)
+        //                                         .FirstOrDefault();
                
                
-                return selectedCustomer;
-            }
-        }
+        //        return selectedCustomer;
+        //    }
+        //}
 
         
     }
