@@ -169,11 +169,38 @@ namespace CurWork.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Показать все фильмы.
+        /// </summary>
+        internal static string Show_Movies {
+            get {
+                return ResourceManager.GetString("Show Movies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 3.
+        /// </summary>
+        internal static string Three {
+            get {
+                return ResourceManager.GetString("Three", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Yes.
         /// </summary>
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 0.
+        /// </summary>
+        internal static string Zero {
+            get {
+                return ResourceManager.GetString("Zero", resourceCulture);
             }
         }
     }

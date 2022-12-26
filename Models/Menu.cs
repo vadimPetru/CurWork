@@ -11,7 +11,12 @@
            
         public override string ToString()
         {
-            return $"1.{_items[0]}\n2.{_items[1]}";   
+            string menu = String.Empty;
+            for (int i =0; i < _items.Count; i++)
+            {
+                 menu += $"{i + 1}.{_items[i]}\n";
+            }
+            return menu;
         }
     }
 }

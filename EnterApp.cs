@@ -13,7 +13,7 @@ namespace CurWork
         private readonly FormRegistration _formRegistration;
         private readonly FormAuthorization _formAuthorization;
         private readonly MenuObject choiceMenu;
-
+        private int _index;
 
         public EnterApp() 
         {
@@ -25,18 +25,28 @@ namespace CurWork
        
         public Customer MakeAChoice() // TODO:
         {
-            Console.WriteLine(Resources.Registraion);
-            Console.WriteLine(choiceMenu);
-            var index = int.Parse(Console.ReadLine());
+            
 
             List<IOnCheack> forms = new List<IOnCheack>
             {
                 _formAuthorization,
                 _formRegistration
-                
+
             };
 
-            return forms[index-1].OnCheack();
+            do
+            {
+                Console.Clear();
+                Console.WriteLine(Resources.Registraion);
+                Console.WriteLine(choiceMenu);
+                _index = int.Parse(Console.ReadLine());
+
+            } while (_index <= 0 | _index > forms.Count);
+           
+
+            
+
+            return forms[_index - 1].OnCheack();
 
         }
     }

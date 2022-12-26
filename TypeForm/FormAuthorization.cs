@@ -1,31 +1,17 @@
-﻿using CurWork.DAL.Context;
-using CurWork.DAL.Entities;
-using CurWork.Helpers;
-using CurWork.Properties;
-using CurWork.TypeOFValidations;
+﻿using CurWork.DAL.Entities;
+
 
 namespace CurWork.TypeForm.Form
 {
-    public class FormAuthorization : Forms , IOnCheack
+    public class FormAuthorization :  IOnCheack
     {
 
-        private readonly Helper _helper;
+        DbManager manager = new();
         public Customer Customer { get; private set; }
-        public FormAuthorization() : base()
-        {
-            _helper = new();
-           
-        }
-        
+       
         public Customer OnCheack()
         {
-            using (TicketsalesmanagerContext context = new())
-            {
-
-                 Customer = _helper.CheackUser(_helper.CreateCustomer(new Customer()));
-               
-                return Customer;
-            }
+            return manager.Authorization(Customer);
         }
 
     }

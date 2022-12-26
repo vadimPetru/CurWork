@@ -1,17 +1,21 @@
 ﻿using CurWork.Properties;
 using CurWork.Menu;
 using CurWork.DAL.Entities;
-using CurWork.TypeOFValidations;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 
 namespace CurWork.Controller
 {
+
     public class MenuController  
     {
         private readonly BuyTicketController _buying;
         private readonly ReturnTicketController _returning;
         private readonly MenuObject _menu;
         List<ITicket> tickets = new();
-        
+        private int _input;
+
+
 
         private IEnumerable<ITicket> Add()
         {
@@ -31,32 +35,23 @@ namespace CurWork.Controller
         
         public void LogicsMenu(Customer currentCustomer)
         {
-           
-            Console.WriteLine(_menu);
-            int input = int.Parse(Console.ReadLine());
+            
+            
+            do
+            {
+                Console.Clear();
+                Console.WriteLine(_menu);
+                    _input = int.Parse(Console.ReadLine());
+            }
+            while (_input > Convert.ToInt32(Resources.Zero) & _input > tickets.Count);
             tickets = (List<ITicket>)Add();
-            tickets[input-1].OnRegistration(currentCustomer);
-            tickets[input-1].UnRegistration();
-
-
-
-
-            //if (input == 1)
-            //{
-            //    _buying.OnRegistration(currentCustomer);
-
-            //    _buying.UnRegistration();
-            //}
-            //if (input == 2)
-            //{
-            //    _returning.OnRegistration(currentCustomer);
-
-            //    _returning.UnRegistration();
-            //}
-
+            tickets[_input-1].OnRegistration(currentCustomer);
+            tickets[_input-1].UnRegistration();
 
         }
 
+        
+     
         
     }
 }

@@ -1,6 +1,5 @@
 ﻿using CurWork.DAL.Context;
 using CurWork.DAL.Entities;
-using CurWork.Helpers;
 using CurWork.TypeOFValidations;
 
 
@@ -10,14 +9,11 @@ namespace CurWork.Controller
     public  class ReturnTicketController : ITicket
     {
         public event ReturnHendler returning;
-        public BuyHendler buying;
-        private GetHelpers _get;
-        private MoviesList _list;
+        private readonly DbManager _manager;
+   
         public ReturnTicketController()
         {
-            
-            _get = new GetHelpers();
-            _list = new();
+            _manager = new DbManager();
         }
        
         public void OnRegistration(Customer currentCustomer)
@@ -32,16 +28,8 @@ namespace CurWork.Controller
         }
         public void Ticket(Customer currentCustomer)
         {
-            _list.GetRecords();
-            var selectedMovie = _get.Get(new Movie());
-            
-            using (TicketsalesmanagerContext context = new())
-            {
-                var selectedRecord = context.Charterclients.Where(t => t.Customerid == currentCustomer.Id & t.Movieid == selectedMovie.Id).FirstOrDefault();
 
-                context.Charterclients.Remove(selectedRecord);
-                context.SaveChanges();
-            }
+            _manager.ReturnTicket(currentCustomer);
         }
 
        
