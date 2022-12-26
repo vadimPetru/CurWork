@@ -35,15 +35,13 @@ namespace CurWork.Controller
         
         public void LogicsMenu(Customer currentCustomer)
         {
-            
-            
             do
             {
                 Console.Clear();
                 Console.WriteLine(_menu);
                     _input = int.Parse(Console.ReadLine());
             }
-            while (_input > Convert.ToInt32(Resources.Zero) & _input > tickets.Count);
+            while (_input <= Convert.ToInt32(Resources.Zero) & _input >= tickets.Count);
             tickets = (List<ITicket>)Add();
             tickets[_input-1].OnRegistration(currentCustomer);
             tickets[_input-1].UnRegistration();

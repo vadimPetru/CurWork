@@ -64,7 +64,7 @@ namespace CurWork
 
                     foreach (var item in list)
                     {
-                        Console.WriteLine($"Название фильма:{item.Moviename} , Жанр:{item.Genre} , Дата{item.DateOfRelease}") ;
+                        Console.WriteLine($"Название фильма:{item.Moviename,-15} , Жанр:{item.Genre,10} , Дата:{item.DateOfRelease,10}") ;
                     }
                 }
                 catch (NullReferenceException)
